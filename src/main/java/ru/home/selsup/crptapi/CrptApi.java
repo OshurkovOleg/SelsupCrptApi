@@ -28,10 +28,10 @@ public class CrptApi {
     private int requestCount = 0;
     private long lastRequestTime = System.currentTimeMillis();
 
-    public CrptApi(TimeUnit timeUnit, int requestLimit) {
+    public CrptApi(int requestLimitSecond, int requestLimit) {
         this.httpClient = HttpClient.newHttpClient();
         this.requestLimit = requestLimit;
-        this.intervalMillis = timeUnit.toMillis(1);
+        this.intervalMillis = TimeUnit.SECONDS.toMillis(requestLimitSecond);
     }
 
     public void createDocument(Document document, String signature) {
@@ -90,6 +90,8 @@ public class CrptApi {
 
     public static void main(String[] args) {
         System.out.println("Hello Selsup!");
+        new CrptApi(10, 5);
+
     }
 
     @Getter
@@ -135,5 +137,4 @@ public class CrptApi {
         private String uit_code;
         private String uitu_code;
     }
-
 }
